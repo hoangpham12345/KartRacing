@@ -410,7 +410,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         object mapIndex;
-        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("map", out mapIndex))
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("m", out mapIndex))
         {
             switch (Convert.ToInt32(mapIndex))
             {

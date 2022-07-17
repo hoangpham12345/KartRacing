@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SinglePlayerLapControler : MonoBehaviour
+public class SinglePlayerLapController : MonoBehaviour
 {
     private List<GameObject> checkpoints = new List<GameObject>();
     //private List<GameObject> passedCheckpoints;

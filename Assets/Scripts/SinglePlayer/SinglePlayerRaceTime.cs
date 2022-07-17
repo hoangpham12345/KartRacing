@@ -30,7 +30,7 @@ public class SinglePlayerRaceTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!SinglePlayerLapControler.isFnished)   // if race still continue
+        if (!SinglePlayerLapController.isFnished)   // if race still continue
         {
             timeElapsed += Time.deltaTime;
             time.text = "Time: " + Math.Round(timeElapsed, 2);
