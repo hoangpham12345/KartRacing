@@ -5,6 +5,7 @@ using UnityEngine.Audio;	// Unity audio library, import this to get the AudioMix
 using TMPro;	// TextMesh pro library, use this to take the TMP_Dropdown
 using UnityEngine.Rendering;	// Unity Rendering, use this to get the list of RenderPipelineAsset
 using UnityEngine.UI; // Unity UI library, use to get resolutions
+using System.Linq;
 
 public class SettingsMenuHandler : MonoBehaviour
 {
@@ -38,13 +39,13 @@ public class SettingsMenuHandler : MonoBehaviour
         resolutionDropdown.ClearOptions();
 
         // Create a list to store all option strings
-        List<string> options = new List<string>();
+        HashSet<string> options = new HashSet<string>();
 
         int currentResolutionIndex = 0;
         // Iterate all elements in the resolution array and add it to the list.
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
+            string option = resolutions[i].width + " x " + resolutions[i].height + " " + resolutions[i].refreshRate + "Hz";
             options.Add(option);
 
             if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
@@ -53,7 +54,7 @@ public class SettingsMenuHandler : MonoBehaviour
             }
         }
 
-        resolutionDropdown.AddOptions(options);
+        resolutionDropdown.AddOptions(options.ToList());
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
     }

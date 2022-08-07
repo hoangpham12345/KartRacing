@@ -65,8 +65,8 @@ public class MultiplayerRacingModeManager : MonoBehaviour
             o.SetActive(false);
         }
 
-        if (PhotonNetwork.AutomaticallySyncScene)
-            PhotonNetwork.AutomaticallySyncScene = false;
+        // if (PhotonNetwork.AutomaticallySyncScene)
+        //     PhotonNetwork.AutomaticallySyncScene = false;
     }
 
     // Update is called once per frame

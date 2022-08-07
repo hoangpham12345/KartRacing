@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
   DevAccountEmail: phamhuyhoang93tn@gmail.com
-  DevAccountToken: w6cggnk44cdzc6dgnnyq9nmq5dr47t3shq358c6rhzhadwwhqra18mojsdhd4hrjpjnsf649cr6yzt8pyd4yo9tg5grmpn7uqnghgoib5r37x5asfosiymme7p6kr8pyggyu9dxqdnffta875yas43urijcjdkocewhir4twg8npfimnfsxw4u9mwdsw1h16bghf7q5i
+  DevAccountToken: epzwgxk1fcnuiyfgsj9ui66gin7zc39ib98zanxf8o4dhk3z16hgsmj45jhqtuuqeyukgaiugd7cebaq5buonqu7rfntwuehqkcyamtsc6foaazncpi4h6nbyazhoq185uzd9qsomgbxcp6dehj3sipqbbyffxcq9yqx6rqucdjmwmybepubyppfcntif8b9cue1iroo
   SelectedStudio: Kart Racing
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 0
+  curMainMenuIdx: 4
   curSubMenuIdx: 0

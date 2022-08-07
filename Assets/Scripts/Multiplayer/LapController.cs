@@ -15,7 +15,11 @@ public class LapController : MonoBehaviourPun
         WhoFinishedEventCode = 0
     }
 
+    private bool passed = false;
+
     private int finishOrder = 0;
+    private int got = 0;
+    private int sent = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -41,10 +45,13 @@ public class LapController : MonoBehaviourPun
             }
             if (other.name == "FinishCheckpoint")
             {
-                Debug.Log(gameObject.name);
-                if (!displayed)
-                    GameFinished();
-                displayed = true;
+                if (!passed)
+                {
+                    Debug.Log(gameObject.name);
+                    if (!displayed)
+                        GameFinished();
+                    displayed = true;
+                }
             }
         }
     }
@@ -64,6 +71,8 @@ public class LapController : MonoBehaviourPun
 
         if (photonEvent.Code == (byte)RaiseEventCode.WhoFinishedEventCode)
         {
+            got +=1;
+            Debug.Log("Got " + got + " times");
             object[] data = (object[])photonEvent.CustomData;
 
             string nickNameOfFinishedPlayer = (string)data[0];
@@ -73,25 +82,27 @@ public class LapController : MonoBehaviourPun
             Debug.Log(nickNameOfFinishedPlayer + " " + finishOrder);
 
             GameObject orderUITextGameObject = MultiplayerRacingModeManager.instance.finishOrderUIGameObjects[finishOrder - 1];
-            orderUITextGameObject.SetActive(true);
-            if (viewID == photonView.ViewID)
+            if (!orderUITextGameObject.activeSelf)
             {
-                orderUITextGameObject.GetComponent<TMP_Text>().text = finishOrder + ". " + nickNameOfFinishedPlayer + " (YOU)";
-                orderUITextGameObject.GetComponent<TMP_Text>().color = Color.red;
-                MultiplayerRacingModeManager.instance.canvasPanel.SetActive(true);
+                orderUITextGameObject.SetActive(true);
+                if (viewID == photonView.ViewID)
+                {
+                    orderUITextGameObject.GetComponent<TMP_Text>().text = finishOrder + ". " + nickNameOfFinishedPlayer + " (YOU)";
+                    orderUITextGameObject.GetComponent<TMP_Text>().color = Color.red;
+                    MultiplayerRacingModeManager.instance.canvasPanel.SetActive(true);
+                }
+                else
+                {
+                    orderUITextGameObject.GetComponent<TMP_Text>().text = finishOrder + " " + nickNameOfFinishedPlayer;
+                }
             }
-            else
-            {
-                orderUITextGameObject.GetComponent<TMP_Text>().text = finishOrder + " " + nickNameOfFinishedPlayer;
-            }
-
         }
     }
 
     void GameFinished()
     {
         GetComponent<KartGame.KartSystems.ArcadeKart>().SetCanMove(false);
-
+        Debug.Log("Sent " + ++sent + " times");
 
         finishOrder += 1;
 
@@ -109,7 +120,7 @@ public class LapController : MonoBehaviourPun
 
         SendOptions sendOptions = new SendOptions
         {
-            Reliability = true
+            Reliability = false
         };
 
         PhotonNetwork.RaiseEvent((byte)RaiseEventCode.WhoFinishedEventCode, data, raiseEventOptions, sendOptions);
